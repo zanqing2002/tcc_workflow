@@ -1,0 +1,367 @@
+{
+    "id": "mytravelexpense",
+    "schemaVersion": "1.1.0",
+    "name": "MyTravelExpense",
+    "revision": "1.0",
+    "type": "start",
+    "readOnly": false,
+    "content": [
+        {
+            "id": "report_header",
+            "type": "section",
+            "title": "Report Header",
+            "content": [
+                {
+                    "id": "user_name",
+                    "type": "string",
+                    "label": "User Name",
+                    "readOnly": false,
+                    "value": "${context.expense.userName}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "comment_for_approval",
+                    "type": "string",
+                    "label": "Comment for Approval",
+                    "readOnly": false,
+                    "value": "${context.expense.commentForApproval}",
+                    "control": {
+                        "type": "TextArea",
+                        "properties": {
+                            "height": "small"
+                        }
+                    },
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "user_id",
+                    "type": "string",
+                    "label": "User ID",
+                    "readOnly": false,
+                    "value": "${context.expense.userID}",
+                    "constraints": {
+                        "required": true
+                    }
+                }
+            ]
+        },
+        {
+            "id": "general_travel_information",
+            "type": "section",
+            "title": "General Travel Information",
+            "content": [
+                {
+                    "id": "destination",
+                    "type": "string",
+                    "label": "Destination",
+                    "readOnly": false,
+                    "value": "${context.expense.destination}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "category",
+                    "type": "string",
+                    "label": "Category",
+                    "readOnly": false,
+                    "value": "${context.expense.category}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "start_date",
+                    "type": "date",
+                    "label": "Start Date",
+                    "readOnly": false,
+                    "value": "${context.expense.startDate}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "end_date",
+                    "type": "date",
+                    "label": "End Date",
+                    "readOnly": false,
+                    "value": "${context.expense.endDate}",
+                    "constraints": {
+                        "required": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "expense_details",
+            "type": "section",
+            "title": "Expense Details",
+            "content": [
+                {
+                    "id": "list_of_expenses",
+                    "type": "collection",
+                    "title": "List of Expenses",
+                    "addEnabled": true,
+                    "deleteEnabled": true,
+                    "value": "${context.expense.listOfExpenses}",
+                    "content": [
+                        {
+                            "id": "date",
+                            "type": "date",
+                            "label": "Date",
+                            "readOnly": false,
+                            "value": "${item.date}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "expense_type",
+                            "type": "string",
+                            "label": "Expense Type",
+                            "readOnly": false,
+                            "value": "${item.expenseType}",
+                            "control": {
+                                "type": "Dropdown",
+                                "properties": {
+                                    "items": [
+                                        {
+                                            "value": "type1",
+                                            "displayValue": "Type1"
+                                        },
+                                        {
+                                            "value": "type2",
+                                            "displayValue": "Type2"
+                                        }
+                                    ]
+                                }
+                            },
+                            "constraints": {
+                                "required": true,
+                                "enum": [
+                                    "type1",
+                                    "type2"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "amount",
+                            "type": "float",
+                            "label": "Amount",
+                            "readOnly": false,
+                            "value": "${item.amount}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "approval_status",
+            "type": "section",
+            "title": "Current Approval",
+            "content": [
+                {
+                    "id": "next_approval_process_id",
+                    "type": "string",
+                    "label": "Approval Process ID",
+                    "readOnly": false,
+                    "value": "${context.approval.processID}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "approvalprocess",
+                    "type": "string",
+                    "label": "Approval Process",
+                    "readOnly": false,
+                    "value": "${context.approval.approvalProcess}",
+                    "constraints": {
+                        "required": false
+                    }
+                },
+                {
+                    "id": "next_approver",
+                    "type": "string",
+                    "label": "Approver ID",
+                    "readOnly": false,
+                    "value": "${context.approval.approverID}",
+                    "constraints": {
+                        "required": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "approver_list",
+            "type": "section",
+            "title": "Approval Process",
+            "content": [
+                {
+                    "id": "list_of_approvers",
+                    "type": "collection",
+                    "title": "List of Approvers",
+                    "addEnabled": true,
+                    "deleteEnabled": true,
+                    "value": "${context.approval.listOfApprovers}",
+                    "content": [
+                        {
+                            "id": "id",
+                            "type": "string",
+                            "label": "ID",
+                            "readOnly": false,
+                            "value": "${item.ID}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "approval_process",
+                            "type": "string",
+                            "label": "Approval Process",
+                            "readOnly": false,
+                            "value": "${item.approvalProcess}",
+                            "control": {
+                                "type": "Dropdown",
+                                "properties": {
+                                    "items": [
+                                        {
+                                            "value": "MANAGER_APPROVAL",
+                                            "displayValue": "Manager Approval"
+                                        },
+                                        {
+                                            "value": "COST_CENTER_APPROVAL",
+                                            "displayValue": "Cost Center Approval"
+                                        }
+                                    ]
+                                }
+                            },
+                            "constraints": {
+                                "required": true,
+                                "enum": [
+                                    "MANAGER_APPROVAL",
+                                    "COST_CENTER_APPROVAL"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "user_id",
+                            "type": "string",
+                            "label": "User ID",
+                            "readOnly": false,
+                            "value": "${item.userId}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "user_name",
+                            "type": "string",
+                            "label": "User Name",
+                            "readOnly": false,
+                            "value": "${item.userName}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "status",
+                            "type": "string",
+                            "label": "Status",
+                            "readOnly": false,
+                            "value": "${item.status}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "sequence",
+                            "type": "integer",
+                            "label": "Sequence",
+                            "readOnly": false,
+                            "value": "${item.sequence}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "approval_history",
+                    "type": "collection",
+                    "title": "Approval History",
+                    "addEnabled": true,
+                    "deleteEnabled": true,
+                    "value": "${context.approval.listOfApproval}",
+                    "content": [
+                        {
+                            "id": "id",
+                            "type": "integer",
+                            "label": "ID",
+                            "readOnly": false,
+                            "value": "${item.ID}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "createby",
+                            "type": "string",
+                            "label": "Created By",
+                            "readOnly": false,
+                            "value": "${item.createBy}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "createat",
+                            "type": "date",
+                            "label": "Created At",
+                            "readOnly": false,
+                            "value": "${item.createAt}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "approvalprocess",
+                            "type": "string",
+                            "label": "Approval Process",
+                            "readOnly": false,
+                            "value": "${item.approvalProcess}",
+                            "constraints": {
+                                "required": false
+                            }
+                        },
+                        {
+                            "id": "comment",
+                            "type": "string",
+                            "label": "Comment",
+                            "readOnly": false,
+                            "value": "${item.Comment}",
+                            "constraints": {
+                                "required": false
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "id": "action1",
+            "text": "Send to my Manager",
+            "workflowDefinitionId": "sample1",
+            "workflowPath": "/tcc_workflow/workflow/workflows/sample1.workflow"
+        }
+    ]
+}

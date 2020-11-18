@@ -1,0 +1,80 @@
+ID: tcc_workflow
+_schema-version: "2.1"
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: com.sap.tcc.workflow.approuter
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: tcc_workflow_html5_repo_runtime
+      - name: tcc_workflow_portal_resources
+      - name: tcc_workflow_uaa
+      - name: tcc_workflow_workflow
+      - name: tcc_workflow_business_rules
+      - name: dest_tcc_workflow
+  # - name: com.sap.tcc.workflow.uideployer
+  #   type: com.sap.html5.application-content
+  #   path: uideployer
+  #   requires:
+  #     - name: tcc_workflow_html5_repo_host
+  - name: com.sap.tcc.workflow.workflow
+    type: com.sap.application.content
+    path: workflow
+    requires:
+      - name: tcc_workflow_workflow
+        parameters:
+          content-target: true
+  - name: com.sap.tcc.workflow.flp
+    type: com.sap.portal.content
+    path: flp
+    parameters:
+      stack: cflinuxfs3
+      memory: 128M
+      buildpack: "https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.39/nodejs-buildpack-cflinuxfs3-v1.6.39.zip"
+    requires:
+      - name: tcc_workflow_portal_resources
+      - name: tcc_workflow_uaa
+      - name: tcc_workflow_workflow
+      - name: tcc_workflow_html5_repo_runtime
+resources:
+  - name: tcc_workflow_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: tcc_workflow_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: tcc_workflow_uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: application
+      service: xsuaa
+      path: ./xs-security.json
+  - name: tcc_workflow_workflow
+    parameters:
+      service-plan: standard
+      service: workflow
+    type: org.cloudfoundry.managed-service
+  - name: tcc_workflow_portal_resources
+    parameters:
+      service-plan: standard
+      service: portal
+    type: org.cloudfoundry.managed-service
+  - name: dest_tcc_workflow
+    parameters:
+      service-plan: lite
+      service: destination
+    type: org.cloudfoundry.managed-service
+  - name: tcc_workflow_business_rules
+    parameters:
+      service-plan: standard
+      service: business-rules
+    type: org.cloudfoundry.managed-service

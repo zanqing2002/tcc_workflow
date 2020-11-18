@@ -1,0 +1,82 @@
+{
+	"_version": "3.0.0",
+	"identification": {
+		"id": "708f1324-e70f-44d6-a4a8-7a30df669ec7-1589773584554",
+		"entityType": "bundle"
+	},
+	"payload": {
+		"catalogs": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultCatalogId",
+				"title": "{{title}}",
+				"entityType": "catalog",
+				"i18n": "i18n/defaultCatalogId.properties"
+			},
+			"payload": {
+				"viz": []
+			}
+		}],
+		"groups": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "defaultGroupId",
+				"title": "{{title}}",
+				"entityType": "group",
+				"i18n": "i18n/defaultGroupId.properties"
+			},
+			"payload": {
+				"viz": [{
+					"id": "com.sap.bpm.monitorworkflow-0-1569475771450",
+					"appId": "com.sap.bpm.monitorworkflow",
+					"vizId": "bpmworkflowmonitor-DisplayInstances"
+				}, {
+					"id": "com.sap.bpm.monitorworkflow-1-1569475771450",
+					"appId": "com.sap.bpm.monitorworkflow",
+					"vizId": "bpmworkflowmonitor-DisplayDefinitions"
+				}, {
+					"id": "cross.fnd.fiori.inbox-2-1569475771450",
+					"appId": "cross.fnd.fiori.inbox",
+					"vizId": "WorkflowTask-DisplayMyInbox"
+				}, {
+					"id": "com.sap.bpm.wus.form.player-3-1596079198155",
+					"appId": "com.sap.bpm.wus.form.player",
+					"vizId": "request-approval-app-config"
+				}]
+			}
+		}],
+		"sites": [{
+			"_version": "3.0.0",
+			"identification": {
+				"id": "395da4a9-1080-4cbd-86b1-5e1bd50c6920-1589773584554",
+				"entityType": "site",
+				"title": "SAP Fiori launchpad site on Cloud Foundry",
+				"description": "SAP Fiori launchpad site on Cloud Foundry, deployed from SAP Web IDE"
+			},
+			"payload": {
+				"config": {
+					"ushellConfig": {
+						"renderers": {
+							"fiori2": {
+								"componentData": {
+									"config": {
+										"applications": {
+											"Shell-home": {}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"groupsOrder": ["defaultGroupId"],
+				"sap.cloud.portal": {
+					"config": {
+						"theme.id": "sap_fiori_3",
+						"theme.active": ["sap_fiori_3", "sap_fiori_3_dark", "sap_belize_hcb", "sap_belize_hcw"]
+					}
+				}
+			}
+		}]
+	}
+}
