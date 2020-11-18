@@ -73,7 +73,7 @@ gen
 
 .mta/
 *.mtar
-
+*.war
 .DS_Store
 
 node_modules/
